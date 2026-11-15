@@ -9,6 +9,7 @@ PAGES = [("app.py", "Home"), ("pages/1_Lab.py", "Live lab"), ("pages/2_Penalty_E
 def sidebar_footer():
     with st.sidebar:
         st.markdown("---")
+        st.markdown("**LASSO Type Penalties**")
         st.markdown('<p class="small">Replication and extension of Konzen and Ziegelmann (2016). '
                     'Saved results of completed runs, except the Live lab and Penalty explorer, which compute small illustrative examples in your browser.', unsafe_allow_html=True)
 
