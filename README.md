@@ -59,12 +59,6 @@ Settings you can change in section 8 of the notebook:
 
 If a run is interrupted, run the notebook again with the same settings: finished pieces are loaded from the checkpoints and only the missing ones are computed.
 
-## Deploy your own copy of the app
-
-1. Sign in at https://share.streamlit.io with GitHub and choose **Create app**.
-2. Pick this repository, branch `main`, and set **Main file path** to `APP/app.py`.
-3. Deploy. The first start installs `APP/requirements.txt` and takes a few minutes.
-
 ## Things to know
 
 - Results of the main experiments (fixed gamma) and the gamma-by-BIC experiments come from separate runs and are never mixed.
