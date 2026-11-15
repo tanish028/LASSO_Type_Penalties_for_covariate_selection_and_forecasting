@@ -16,6 +16,10 @@ header("Interactive", "Live lab: simulate a data set and fit all four methods",
 note("This lab fits <b>one simulated data set</b> (or a few, in the last tab) with a compact re-implementation of the estimators. It is for building intuition and is "
      "<b>not</b> the study: the study's saved results average 1,000 such data sets and are in the Monte Carlo page.")
 
+def _next_seed():
+    st.session_state.seed += 1
+
+
 if "seed" not in st.session_state:
     st.session_state.seed = 2016
 
@@ -28,9 +32,7 @@ with st.sidebar:
     noise = st.slider("Noise level", 0.5, 3.0, 1.0, 0.25, help="Scale of the error in the y equation.")
     c1, c2 = st.columns([2, 1])
     c1.number_input("Random seed", min_value=0, step=1, key="seed")
-    if c2.button("🎲", help="New random draw", use_container_width=True):
-        st.session_state.seed += 1
-        st.rerun()
+    c2.button("🎲", help="New random draw", use_container_width=True, on_click=_next_seed)
     st.markdown("### Penalty settings")
     gamma = st.select_slider("γ (gamma): strength of adaptive weights", [0.25, 0.5, 0.75, 1.0, 1.5, 2.0, 3.0], value=1.0, help="Exponent on the ridge-based weight. The paper uses γ = 1.")
     tune = st.radio("α (alpha) and κ (kappa)", ["Fixed by sliders", "Chosen by BIC over a grid"], help="BIC chooses α (alpha) and κ (kappa) from a 9- and a 6-value grid (the study uses 17 and 9). Slower.") .startswith("Chosen")
