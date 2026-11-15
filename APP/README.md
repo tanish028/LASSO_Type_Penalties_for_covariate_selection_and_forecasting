@@ -70,3 +70,6 @@ If the repository is private, grant Streamlit access to it when asked.
 * The Live lab uses its own compact solver, not the notebook's. It matched the notebook's selected variables for three methods on a test dataset, but found a lower-BIC adaLASSO solution than the notebook's solver. Treat the lab as an illustration; only the saved results are findings.
 * Equity premium: our results do not reproduce the published table and the cause is unresolved. We do not conclude that the paper is wrong.
 * The FRED-MD run's `config.json` lists 121 series (predictors only); the correct count including the target is 122.
+
+## Colour themes
+The sidebar has a **Colour theme** switch: *Forest (green and amber)*, the default, and *Ocean (blue)*, the original look. The choice is kept while you move between pages.

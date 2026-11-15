@@ -1,5 +1,6 @@
 """Reusable visual building blocks: hero, KPI tiles, glow cards, section dividers."""
 import streamlit as st
+from components.theme import recolor
 
 UI_CSS = """
 <style>
@@ -29,22 +30,22 @@ button[data-baseweb="tab"] { border-radius:10px 10px 0 0; padding:.45rem 1rem; }
 
 
 def inject():
-    st.markdown(UI_CSS, unsafe_allow_html=True)
+    st.markdown(recolor(UI_CSS), unsafe_allow_html=True)
 
 
 def hero(kicker, title, text, pills=()):
     inject()
     pr = "".join(f'<span class="pill">{p}</span>' for p in pills)
-    st.markdown(f'<div class="hero"><div class="kicker">{kicker}</div><h1>{title}</h1><p>{text}</p><div class="pillrow">{pr}</div></div>', unsafe_allow_html=True)
+    st.markdown(recolor(f'<div class="hero"><div class="kicker">{kicker}</div><h1>{title}</h1><p>{text}</p><div class="pillrow">{pr}</div></div>'), unsafe_allow_html=True)
 
 
 def tiles(items):
     """items: list of (label, value, sub, colour or None)."""
     inject()
     h = "".join(f'<div class="tile"><div class="lab">{l}</div><div class="val" style="color:{c or "#EAF1E8"}">{v}</div><div class="sub">{s}</div></div>' for l, v, s, c in items)
-    st.markdown(f'<div class="tiles">{h}</div>', unsafe_allow_html=True)
+    st.markdown(recolor(f'<div class="tiles">{h}</div>'), unsafe_allow_html=True)
 
 
 def card(title, text, colour="#4CC38A"):
     inject()
-    st.markdown(f'<div class="card"><h4><span class="dot" style="background:{colour}"></span>{title}</h4><p>{text}</p></div>', unsafe_allow_html=True)
+    st.markdown(recolor(f'<div class="card"><h4><span class="dot" style="background:{colour}"></span>{title}</h4><p>{text}</p></div>'), unsafe_allow_html=True)

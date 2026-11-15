@@ -1,6 +1,7 @@
 """Animated, clickable workflow diagram (self-contained HTML/SVG/JS rendered with st.components.v1.html)."""
 import json
 import streamlit as st
+from components.theme import recolor, current
 import streamlit.components.v1 as components
 
 STEPS = [
@@ -97,6 +98,9 @@ function stop(){if(timer){clearInterval(timer);timer=null}}
 build();
 </script>
 """.replace("__PAYLOAD__", payload)
+    if current() == "Ocean":                        # swap the two method colours that differ between themes, then the rest
+        html = html.replace("#5FA8D3", "@@A").replace("#F2A93B", "#4FA3F7").replace("@@A", "#E9A93B")
+        html = recolor(html)
     if hasattr(st, "iframe"):                       # newer Streamlit: components.html is deprecated
         st.iframe(html, height=height)
     else:

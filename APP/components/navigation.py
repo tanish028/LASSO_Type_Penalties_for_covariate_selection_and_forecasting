@@ -1,5 +1,6 @@
 """Sidebar and page-level navigation helpers."""
 import streamlit as st
+from components.theme import THEMES, current
 
 PAGES = [("app.py", "Home"), ("pages/1_Lab.py", "Live lab"), ("pages/2_Penalty_Explorer.py", "Penalty explorer"),
          ("pages/3_Monte_Carlo.py", "Monte Carlo"), ("pages/4_Equity_Premium.py", "Equity premium"),
@@ -9,6 +10,8 @@ PAGES = [("app.py", "Home"), ("pages/1_Lab.py", "Live lab"), ("pages/2_Penalty_E
 def sidebar_footer():
     with st.sidebar:
         st.markdown("---")
+        st.selectbox("Colour theme", THEMES, index=0 if current() == "Forest" else 1, key="theme_widget",
+                     on_change=lambda: st.session_state.update(theme=st.session_state.theme_widget))
         st.markdown("**LASSO Type Penalties**")
         st.markdown('<p class="small">Replication and extension of Konzen and Ziegelmann (2016). '
                     'Saved results of completed runs, except the Live lab and Penalty explorer, which compute small illustrative examples in your browser.', unsafe_allow_html=True)
