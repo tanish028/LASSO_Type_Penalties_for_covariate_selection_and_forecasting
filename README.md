@@ -15,7 +15,7 @@ The four methods compared: **LASSO**, **adaLASSO**, **WLadaLASSO** (from the pap
 
 ## Live app
 
-**Live link:** `ADD THE STREAMLIT LINK HERE AFTER DEPLOYING`
+**Live link:** https://adaptive-penalty-forecasting.streamlit.app/
 
 The app has a live lab (simulate data and fit all four methods in the browser), an animated workflow diagram, a penalty explorer, a Monte Carlo scenario map, the equity premium and FRED-MD results, and a methods page.
 
@@ -37,17 +37,18 @@ Then open http://localhost:8501. Run the commands from inside the `APP` folder. 
 
 ## Run the notebook
 
-**In Google Colab (recommended for the long runs):** upload `LASSO_Type_Penalties.ipynb`, then follow the step-by-step instructions at the top of the notebook. It asks for a `datasets.zip` with the data files below. The first time, run the unit tests and the `quick_check` profile.
+**In Google Colab (recommended for the long runs):** upload `LASSO_Type_Penalties.ipynb`, then follow the step-by-step instructions at the top of the notebook. It asks for the `datasets.zip` that is included in this repository (the files are listed below). The first time, run the unit tests and the `quick_check` profile.
 
-**On your own computer:** install Jupyter and the packages the first cells install (`numpy`, `pandas`, `scipy`, `scikit-learn`, `joblib`, `matplotlib`, `openpyxl`, `xlrd`), put `datasets.zip` next to the notebook, and run the cells from top to bottom.
+**On your own computer:** install Jupyter and the packages the first cells install (`numpy`, `pandas`, `scipy`, `scikit-learn`, `joblib`, `matplotlib`, `openpyxl`, `xlrd`), keep `datasets.zip` next to the notebook (it is in the repository root), and run the cells from top to bottom.
 
-`datasets.zip` should contain these files (the notebook finds them by name, so the folder layout inside does not matter):
+`datasets.zip` contains these files (the notebook finds them by name, so the folder layout inside does not matter). The data belong to their original authors; we only provide a copy so the notebook runs as it did for us:
 
 | File | Source |
 |---|---|
 | `PredictorData_2005_original.xls` | Goyal and Welch equity premium data, original 2005 release |
 | `PredictorData_current.xlsx` | Goyal and Welch, current file |
 | `current.csv` | FRED-MD monthly database |
+| `dataJBES.xlsx` | Real-time inflation vintages. The notebook loads and checks this file but no experiment uses it. |
 
 Settings you can change in section 8 of the notebook:
 
@@ -75,3 +76,4 @@ If a run is interrupted, run the notebook again with the same settings: finished
 ## Reference
 
 Konzen, E. and Ziegelmann, F. A. (2016). LASSO-Type Penalties for Covariate Selection and Forecasting in Time Series. *Journal of Forecasting*, 35, 592–612, DOI 10.1002/for.2403.
+
