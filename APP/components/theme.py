@@ -4,10 +4,10 @@ import plotly.graph_objects as go
 import plotly.io as pio
 
 # one colour per method, used in every chart
-COLORS = {"LASSO": "#9AA7BD", "adaLASSO": "#E9A93B", "WLadaLASSO": "#4FA3F7", "Ext1": "#3FD0A0",
-          "adaLASSO (γ by BIC)": "#F3CD85", "WLadaLASSO (γ by BIC)": "#9CCBFA", "Ext1 (γ by BIC)": "#9BE8CC",
+COLORS = {"LASSO": "#9AA79F", "adaLASSO": "#5FA8D3", "WLadaLASSO": "#F2A93B", "Ext1": "#B8DC6B",
+          "adaLASSO (γ by BIC)": "#F3CD85", "WLadaLASSO (γ by BIC)": "#A9E3C4", "Ext1 (γ by BIC)": "#9BE8CC",
           "AR(BIC)": "#E06C75", "AR(BIC) benchmark": "#E06C75"}
-BG, PANEL, TEXT, MUTED, GRID = "#0B1426", "#101B33", "#E3E9F4", "#8FA1BF", "#22304D"
+BG, PANEL, TEXT, MUTED, GRID = "#0C1712", "#12211A", "#EAF1E8", "#93A89A", "#26382E"
 
 pio.templates["wl"] = go.layout.Template(layout=dict(
     paper_bgcolor="rgba(0,0,0,0)", plot_bgcolor="rgba(0,0,0,0)",
@@ -28,21 +28,21 @@ h1 {{ font-size: 2.05rem; font-weight: 600; line-height: 1.2; margin-bottom: .3r
 h2 {{ font-size: 1.45rem; font-weight: 600; margin-top: 2.2rem; padding-bottom: .35rem; border-bottom: 1px solid {GRID}; }}
 h3 {{ font-size: 1.12rem; font-weight: 600; margin-top: 1.4rem; }}
 p, li {{ line-height: 1.62; font-size: 1.0rem; }}
-.kicker {{ text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; color: #4FA3F7; font-weight: 600; margin-bottom: .2rem; }}
-.lede {{ color: #B9C6DD; font-size: 1.08rem; max-width: 62rem; }}
-.note {{ border-left: 3px solid #4FA3F7; padding: .5rem .9rem; color: #B9C6DD; background: rgba(79,163,247,.06); margin: .8rem 0; font-size: .95rem; }}
+.kicker {{ text-transform: uppercase; letter-spacing: .12em; font-size: .72rem; color: #4CC38A; font-weight: 600; margin-bottom: .2rem; }}
+.lede {{ color: #C3D2C4; font-size: 1.08rem; max-width: 62rem; }}
+.note {{ border-left: 3px solid #4CC38A; padding: .5rem .9rem; color: #C3D2C4; background: rgba(76,195,138,.06); margin: .8rem 0; font-size: .95rem; }}
 .warn {{ border-left: 3px solid #E9A93B; padding: .5rem .9rem; color: #E9D3A8; background: rgba(233,169,59,.07); margin: .8rem 0; font-size: .95rem; }}
 .tag {{ display:inline-block; font-size:.72rem; padding:.08rem .5rem; border-radius:3px; margin-left:.5rem; vertical-align:middle;
         letter-spacing:.06em; text-transform:uppercase; font-weight:600; }}
-.tag-paper {{ background:#1B2B4A; color:#9CCBFA; }}
-.tag-ours {{ background:#12372F; color:#7BE5C0; }}
+.tag-paper {{ background:#1C3227; color:#A9E3C4; }}
+.tag-ours {{ background:#243D1E; color:#D2EC9C; }}
 .tag-expl {{ background:#43361A; color:#F0CE86; }}
 .small {{ color:{MUTED}; font-size:.86rem; }}
 [data-testid="stMetricValue"] {{ font-size: 1.5rem; }}
 [data-testid="stSidebar"] {{ border-right: 1px solid {GRID}; }}
 [data-testid="stSidebarNav"] a {{ font-size: .95rem; }}
 div[data-testid="stDataFrame"] {{ border: 1px solid {GRID}; }}
-a {{ color: #7DB9F5 !important; }}
+a {{ color: #8FD9B0 !important; }}
 hr {{ border-color: {GRID}; }}
 footer {{ visibility: hidden; }}
 </style>

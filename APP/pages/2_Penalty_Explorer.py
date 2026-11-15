@@ -116,7 +116,7 @@ def _curve(v):
 
 frames = [go.Frame(data=[go.Scatter(x=lags, y=_curve(v))], name=f"{v:g}") for v in grid_vals]
 ymax = max(_curve(grid_vals[-1]).max(), 2)
-fa = go.Figure(data=[go.Scatter(x=lags, y=_curve(grid_vals[0]), mode="lines+markers", line=dict(color=COLORS[mname], width=4), marker=dict(size=8), fill="tozeroy", fillcolor="rgba(79,163,247,.10)")], frames=frames)
+fa = go.Figure(data=[go.Scatter(x=lags, y=_curve(grid_vals[0]), mode="lines+markers", line=dict(color=COLORS[mname], width=4), marker=dict(size=8), fill="tozeroy", fillcolor="rgba(76,195,138,.10)")], frames=frames)
 fa.update_layout(height=420, xaxis_title="lag", yaxis_title="lag factor (penalty multiplier, log scale)", yaxis=dict(type="log", range=[-0.1, np.log10(ymax) + 0.1]),
                  updatemenus=[dict(type="buttons", direction="left", x=0.0, y=1.18, buttons=[
                      dict(label="▶ play", method="animate", args=[None, dict(frame=dict(duration=650, redraw=True), fromcurrent=True, transition=dict(duration=300))]),

@@ -59,7 +59,7 @@ with tab_perf:
     models = [c for c in fc.columns if c not in ("date", "actual", "AR(BIC)")]
     pick = st.multiselect("Methods", models, default=["adaLASSO", "WLadaLASSO", "Ext1"])
     fig = go.Figure()
-    fig.add_scatter(x=fc.date, y=fc.actual, name="actual", line=dict(color="#E3E9F4", width=2))
+    fig.add_scatter(x=fc.date, y=fc.actual, name="actual", line=dict(color="#EAF1E8", width=2))
     fig.add_scatter(x=fc.date, y=fc["AR(BIC)"], name="AR(BIC)", line=dict(color=COLORS["AR(BIC)"], width=2))
     for m in pick:
         fig.add_scatter(x=fc.date, y=fc[m], name=m, line=dict(color=COLORS.get(m), width=1.6, dash="dot"))
@@ -165,7 +165,7 @@ with tab_race:
     st.plotly_chart(fig, width="stretch")
     st.markdown("**Forecasts against the actual inflation change.**")
     fig = go.Figure()
-    fig.add_scatter(x=w.date, y=w.actual, mode="lines+markers", name="actual", line=dict(color="#E3E9F4", width=3))
+    fig.add_scatter(x=w.date, y=w.actual, mode="lines+markers", name="actual", line=dict(color="#EAF1E8", width=3))
     fig.add_scatter(x=w.date, y=w["AR(BIC)"], mode="lines", name="AR(BIC)", line=dict(color=COLORS["AR(BIC)"], width=2, dash="dash"))
     for m in pick:
         fig.add_scatter(x=w.date, y=w[m], mode="lines", name=m, line=dict(color=colr(m), width=1.6), opacity=.9)

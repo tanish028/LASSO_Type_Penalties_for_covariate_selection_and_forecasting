@@ -72,29 +72,38 @@ def grid(vec):
 
 
 with t_sel:
-    st.markdown("Each cell is one regressor: a series (row) at a lag (column). Colour = estimated coefficient. "
-                "<b>✕</b> marks an irrelevant regressor that was selected (false positive); <b>○</b> marks a relevant one that was missed.", unsafe_allow_html=True)
-    panels = [("Truth", R["b_true"])] + [(m, R["first"]["coef"][m]) for m in en.METHODS]
-    zmax = max(0.8, max(np.abs(v).max() for _, v in panels)) 
-    zmax = min(zmax, 1.5)
-    fig = make_subplots(rows=2, cols=3, subplot_titles=[p[0] for p in panels], vertical_spacing=0.17, horizontal_spacing=0.06)
+    st.markdown("Each small square is one regressor: a series (row) at a lag (column). **Colour = estimated coefficient** (amber positive, blue negative, dark = zero). "
+                "The **Truth** panel is the answer key; compare each method with it.")
+    st.markdown('<p class="small"><b style="color:#FF7B72">✕</b> = false alarm (an irrelevant regressor was selected) &nbsp;·&nbsp; '
+                '<b style="color:#fff">○</b> = missed (a relevant regressor was set to zero)</p>', unsafe_allow_html=True)
+    T_ = grid(R["b_true"]) != 0
+    panels = [("Truth (answer key)", R["b_true"])] + [(m, R["first"]["coef"][m]) for m in en.METHODS]
+    titles = [panels[0][0]]
+    for m, v in panels[1:]:
+        S_ = grid(v) != 0
+        titles.append(f"{m}<br><sup>found {int((S_ & T_).sum())}/{int(T_.sum())} · false alarms {int((S_ & ~T_).sum())}</sup>")
+    zmax = min(max(0.8, max(np.abs(v).max() for _, v in panels)), 1.5)
+    fig = make_subplots(rows=2, cols=3, subplot_titles=titles, vertical_spacing=0.2, horizontal_spacing=0.06)
     for i, (title, v) in enumerate(panels):
         r_, c_ = i // 3 + 1, i % 3 + 1
         G = grid(v)
-        fig.add_trace(go.Heatmap(z=G, x=list(range(1, L + 1)), y=names, zmin=-zmax, zmax=zmax, colorscale=[[0, "#4FA3F7"], [0.5, "#16213B"], [1, "#F2667A"]], showscale=(i == 0),
-                                 colorbar=dict(len=.4, y=.8, title="coef"), hovertemplate="%{y}, lag %{x}: %{z:.3f}<extra>" + title + "</extra>", xgap=1, ygap=1), row=r_, col=c_)
+        fig.add_trace(go.Heatmap(z=np.where(G == 0, np.nan, G), x=list(range(1, L + 1)), y=names, zmin=-zmax, zmax=zmax,
+                                 colorscale=[[0, "#4F9FD0"], [0.5, "#CFE3D6"], [1, "#F2A93B"]], showscale=(i == 0),
+                                 colorbar=dict(len=.4, y=.8, title="coef"), hovertemplate="%{y}, lag %{x}: %{z:.3f}<extra>" + title.split("<")[0] + "</extra>",
+                                 xgap=2, ygap=2), row=r_, col=c_)
         if i > 0:
-            T_ = grid(R["b_true"]) != 0; S_ = G != 0
+            S_ = G != 0
             fp = np.argwhere(S_ & ~T_); fn = np.argwhere(~S_ & T_)
             if len(fp):
-                fig.add_trace(go.Scatter(x=fp[:, 1] + 1, y=[names[k] for k in fp[:, 0]], mode="markers", marker=dict(symbol="x", size=7, color="#E9A93B"), showlegend=False, hoverinfo="skip"), row=r_, col=c_)
+                fig.add_trace(go.Scatter(x=fp[:, 1] + 1, y=[names[k] for k in fp[:, 0]], mode="markers", marker=dict(symbol="x", size=10, color="#FF7B72", line=dict(width=2, color="#FF7B72")), showlegend=False, hoverinfo="skip"), row=r_, col=c_)
             if len(fn):
-                fig.add_trace(go.Scatter(x=fn[:, 1] + 1, y=[names[k] for k in fn[:, 0]], mode="markers", marker=dict(symbol="circle-open", size=8, color="#111", line=dict(width=1.5)), showlegend=False, hoverinfo="skip"), row=r_, col=c_)
-        fig.update_yaxes(autorange="reversed", row=r_, col=c_, tickfont=dict(size=9))
-        fig.update_xaxes(title_text="lag" if r_ == 2 else None, row=r_, col=c_, dtick=max(1, L // 5))
-    fig.update_layout(height=640, margin=dict(t=60))
+                fig.add_trace(go.Scatter(x=fn[:, 1] + 1, y=[names[k] for k in fn[:, 0]], mode="markers", marker=dict(symbol="circle-open", size=12, color="#FFFFFF", line=dict(width=2.2, color="#FFFFFF")), showlegend=False, hoverinfo="skip"), row=r_, col=c_)
+        fig.update_yaxes(autorange="reversed", row=r_, col=c_, tickfont=dict(size=10), showgrid=False)
+        fig.update_xaxes(title_text="lag (periods back)" if r_ == 2 else None, row=r_, col=c_, dtick=max(1, L // 5), showgrid=False)
+    fig.update_layout(height=700, margin=dict(t=70))
     st.plotly_chart(fig, width="stretch")
-    st.markdown('<p class="small">Truth: y\'s own first lag and lags 1-2 of x₁, x₂, x₃ plus lag 1 of x₄, x₅, x₆ are relevant (10 coefficients); x₇…x₁₀ and all later lags are zero. '
+    st.markdown('<p class="small">Rows: "y" is the forecast variable\'s own past, x₁…x₁₀ are the predictors. Zero coefficients are left as dark empty squares. '
+                'Truth: y\'s own lag 1, lags 1-2 of x₁, x₂, x₃ and lag 1 of x₄, x₅, x₆ are relevant (10 coefficients); x₇…x₁₀ and later lags are zero. '
                 'Raise α (alpha) or κ (kappa) to see the lag-penalising methods zero out distant lags.</p>', unsafe_allow_html=True)
 
 with t_w:
@@ -107,8 +116,8 @@ with t_w:
         lags = np.arange(1, L + 1)
         allm = [lw[lag_order == l].mean() for l in lags]
         relm = [lw[(lag_order == l) & rel].mean() if np.any((lag_order == l) & rel) else np.nan for l in lags]
-        fig.add_trace(go.Scatter(x=lags, y=allm, mode="lines+markers", name="all regressors", line=dict(color="#8FA1BF"), showlegend=(i == 0)), row=1, col=i + 1)
-        fig.add_trace(go.Scatter(x=lags, y=relm, mode="lines+markers", name="truly relevant", line=dict(color="#3FD0A0"), showlegend=(i == 0)), row=1, col=i + 1)
+        fig.add_trace(go.Scatter(x=lags, y=allm, mode="lines+markers", name="all regressors", line=dict(color="#93A89A"), showlegend=(i == 0)), row=1, col=i + 1)
+        fig.add_trace(go.Scatter(x=lags, y=relm, mode="lines+markers", name="truly relevant", line=dict(color="#B8DC6B"), showlegend=(i == 0)), row=1, col=i + 1)
         fig.update_xaxes(title_text="lag", row=1, col=i + 1)
     fig.update_yaxes(title_text="mean ln w (relative)", row=1, col=1)
     fig.update_layout(height=380, legend=dict(orientation="h", y=1.15))
@@ -135,7 +144,7 @@ with t_fc:
     actual = R["actual"]
     fig = go.Figure()
     x = list(range(1, len(actual) + 1))
-    fig.add_trace(go.Scatter(x=x, y=actual, mode="lines+markers", name="actual", line=dict(color="#E3E9F4", width=3)))
+    fig.add_trace(go.Scatter(x=x, y=actual, mode="lines+markers", name="actual", line=dict(color="#EAF1E8", width=3)))
     for m in en.METHODS:
         fig.add_trace(go.Scatter(x=x, y=res[m]["pred"], mode="lines+markers", name=m, line=dict(color=COLORS[m], width=1.8, dash="dot")))
     fig.update_layout(height=400, xaxis_title="forecast #", yaxis_title="y", legend=dict(orientation="h", y=1.12))
@@ -169,8 +178,8 @@ with t_mc:
         c1.plotly_chart(fig, width="stretch")
         agg = df.groupby("method")[["MSFE", "recall", "FIVE", "NIV"]].mean().reindex(en.METHODS)
         fig2 = go.Figure()
-        fig2.add_bar(x=agg.index, y=agg.recall, name="recall (relevant found)", marker_color="#3FD0A0")
-        fig2.add_bar(x=agg.index, y=agg.FIVE, name="irrelevant dropped", marker_color="#4FA3F7")
+        fig2.add_bar(x=agg.index, y=agg.recall, name="recall (relevant found)", marker_color="#B8DC6B")
+        fig2.add_bar(x=agg.index, y=agg.FIVE, name="irrelevant dropped", marker_color="#4CC38A")
         fig2.update_layout(height=380, barmode="group", title="Selection quality (mean)", legend=dict(orientation="h", y=-0.15), yaxis=dict(range=[0, 1]))
         c2.plotly_chart(fig2, width="stretch")
         wins = df.pivot(index="rep", columns="method", values="MSFE").idxmin(axis=1).value_counts().reindex(en.METHODS).fillna(0).astype(int)

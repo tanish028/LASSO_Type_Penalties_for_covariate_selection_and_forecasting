@@ -35,10 +35,10 @@ STEPS = [
          f="R²<sub>OS</sub> = 1 − Σ(y−ŷ)² / Σ(y−ȳ<sub>benchmark</sub>)²", k="Positive R²OS = beats the benchmark (historical mean, or AR(BIC))."),
 ]
 METHOD_EXTRA = {
-    "LASSO": ("w<sub>j</sub> = 1 for every regressor", "No weights: one price for all. Everything below is the same as for the other methods.", "#9AA7BD"),
-    "adaLASSO": ("extra<sub>j</sub> = 0", "Weights come only from the ridge stage: weak ridge effects are charged more.", "#E9A93B"),
-    "WLadaLASSO": ("extra<sub>j</sub> = α·ℓ<sub>j</sub>", "Adds a factor e<sup>αℓ</sup> that grows with the lag ℓ: distant lags are charged more. α (alpha) = 0 gives adaLASSO.", "#4FA3F7"),
-    "Ext1": ("extra<sub>j</sub> = κ·π<sub>ℓ</sub>,  π<sub>ℓ</sub> = log m₁ − log m<sub>ℓ</sub>", "Our extension: the lag penalty comes from a decreasing (isotonic) fit m<sub>ℓ</sub> of the mean |ridge coefficient| by lag. κ (kappa) = 0 gives adaLASSO.", "#3FD0A0"),
+    "LASSO": ("w<sub>j</sub> = 1 for every regressor", "No weights: one price for all. Everything below is the same as for the other methods.", "#9AA79F"),
+    "adaLASSO": ("extra<sub>j</sub> = 0", "Weights come only from the ridge stage: weak ridge effects are charged more.", "#5FA8D3"),
+    "WLadaLASSO": ("extra<sub>j</sub> = α·ℓ<sub>j</sub>", "Adds a factor e<sup>αℓ</sup> that grows with the lag ℓ: distant lags are charged more. α (alpha) = 0 gives adaLASSO.", "#F2A93B"),
+    "Ext1": ("extra<sub>j</sub> = κ·π<sub>ℓ</sub>,  π<sub>ℓ</sub> = log m₁ − log m<sub>ℓ</sub>", "Our extension: the lag penalty comes from a decreasing (isotonic) fit m<sub>ℓ</sub> of the mean |ridge coefficient| by lag. κ (kappa) = 0 gives adaLASSO.", "#B8DC6B"),
 }
 
 
@@ -47,46 +47,46 @@ def render(height=640):
     html = """
 <div id="wf"></div>
 <style>
- body{margin:0;background:transparent;font-family:Inter,'Segoe UI',Helvetica,Arial,sans-serif;color:#E3E9F4}
+ body{margin:0;background:transparent;font-family:Inter,'Segoe UI',Helvetica,Arial,sans-serif;color:#EAF1E8}
  #chips{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px 4px;align-items:center}
- .chip{cursor:pointer;border:1px solid #2B3D63;border-radius:999px;padding:4px 12px;font-size:12.5px;color:#B9C6DD;background:#101B33;transition:all .15s}
- .chip.on{color:#0B1426;font-weight:600}
- #play{margin-left:auto;cursor:pointer;border:1px solid #2B3D63;border-radius:8px;padding:4px 12px;font-size:12.5px;color:#9CCBFA;background:#101B33}
- #play:hover{border-color:#4FA3F7}
+ .chip{cursor:pointer;border:1px solid #2F4A3B;border-radius:999px;padding:4px 12px;font-size:12.5px;color:#C3D2C4;background:#12211A;transition:all .15s}
+ .chip.on{color:#0C1712;font-weight:600}
+ #play{margin-left:auto;cursor:pointer;border:1px solid #2F4A3B;border-radius:8px;padding:4px 12px;font-size:12.5px;color:#A9E3C4;background:#12211A}
+ #play:hover{border-color:#4CC38A}
  svg{width:100%;height:auto;display:block}
- .edge{stroke:#2B3D63;stroke-width:2.2;fill:none}
- .flow{stroke:#4FA3F7;stroke-width:2.4;fill:none;stroke-dasharray:6 14;animation:dash 1.1s linear infinite;opacity:.9}
+ .edge{stroke:#2F4A3B;stroke-width:2.2;fill:none}
+ .flow{stroke:#4CC38A;stroke-width:2.4;fill:none;stroke-dasharray:6 14;animation:dash 1.1s linear infinite;opacity:.9}
  @keyframes dash{to{stroke-dashoffset:-20}}
  .node{cursor:pointer}
- .node rect{fill:#101B33;stroke:#2B3D63;stroke-width:1.5;rx:14;transition:all .2s}
- .node:hover rect{stroke:#4FA3F7;fill:#13223F}
- .node.act rect{stroke:var(--c);stroke-width:2.4;fill:#15264A;filter:drop-shadow(0 0 10px var(--c))}
- .node.done rect{stroke:#3FD0A0}
- .node text{fill:#E3E9F4;text-anchor:middle;pointer-events:none}
- .ic{font-size:22px}.tt{font-size:13px;font-weight:600}.ss{font-size:10.5px;fill:#8FA1BF!important}
- .num{font-size:10px;fill:#8FA1BF!important}
- #panel{margin:10px 4px 0;border:1px solid #22304D;border-radius:14px;padding:12px 16px;background:linear-gradient(160deg,#111E3A,#0D1830);min-height:128px}
+ .node rect{fill:#12211A;stroke:#2F4A3B;stroke-width:1.5;rx:14;transition:all .2s}
+ .node:hover rect{stroke:#4CC38A;fill:#17291F}
+ .node.act rect{stroke:var(--c);stroke-width:2.4;fill:#193126;filter:drop-shadow(0 0 10px var(--c))}
+ .node.done rect{stroke:#B8DC6B}
+ .node text{fill:#EAF1E8;text-anchor:middle;pointer-events:none}
+ .ic{font-size:22px}.tt{font-size:13px;font-weight:600}.ss{font-size:10.5px;fill:#93A89A!important}
+ .num{font-size:10px;fill:#93A89A!important}
+ #panel{margin:10px 4px 0;border:1px solid #26382E;border-radius:14px;padding:12px 16px;background:linear-gradient(160deg,#14261D,#0F1E17);min-height:128px}
  #panel h3{margin:0 0 4px;font-size:16px;font-family:'Source Serif 4',Georgia,serif}
- #panel p{margin:4px 0;font-size:13.5px;line-height:1.5;color:#B9C6DD}
- #formula{font-family:'Cambria Math','Times New Roman',serif;font-size:16px;color:#9CCBFA;background:rgba(79,163,247,.07);border-left:3px solid var(--c);padding:6px 10px;margin:6px 0}
- .key{font-size:12.5px;color:#8FA1BF}
+ #panel p{margin:4px 0;font-size:13.5px;line-height:1.5;color:#C3D2C4}
+ #formula{font-family:'Cambria Math','Times New Roman',serif;font-size:16px;color:#A9E3C4;background:rgba(76,195,138,.07);border-left:3px solid var(--c);padding:6px 10px;margin:6px 0}
+ .key{font-size:12.5px;color:#93A89A}
 </style>
 <script>
 const P=__PAYLOAD__; const S=P.steps, M=P.methods; let cur=0, method="WLadaLASSO", timer=null;
 const W=1100,H=330,pos=[];
 for(let i=0;i<S.length;i++){const row=i<5?0:1; const col=row==0?i:i-5; const x=row==0?70+col*240:170+col*240; pos.push([x,row==0?55:225]);}
 function build(){
- let h='<div id="chips">'+Object.keys(M).map(k=>`<span class="chip ${k==method?'on':''}" data-m="${k}" style="${k==method?'background:'+M[k][2]:''}">${k}</span>`).join('')+'<span style="font-size:12px;color:#8FA1BF;margin-left:6px">choose a method</span><span id="play">▶ play walkthrough</span></div>';
+ let h='<div id="chips">'+Object.keys(M).map(k=>`<span class="chip ${k==method?'on':''}" data-m="${k}" style="${k==method?'background:'+M[k][2]:''}">${k}</span>`).join('')+'<span style="font-size:12px;color:#93A89A;margin-left:6px">choose a method</span><span id="play">▶ play walkthrough</span></div>';
  h+=`<svg viewBox="0 0 ${W} ${H}">`;
  for(let i=0;i<S.length-1;i++){const [x1,y1]=pos[i],[x2,y2]=pos[i+1];
   let d; if(y1==y2){d=`M${x1+62},${y1+22} L${x2-62},${y2+22}`;} else {const ym=(y1+74+y2-30)/2; d=`M${x1},${y1+74} L${x1},${ym} L${x2},${ym} L${x2},${y2-30}`;}
   h+=`<path class="edge" d="${d}"/>`; if(i<cur) h+=`<path class="flow" d="${d}"/>`;}
  for(let i=0;i<S.length;i++){const [x,y]=pos[i], s=S[i], cl=i==cur?'act':(i<cur?'done':'');
-  const col=(i==4)?M[method][2]:'#4FA3F7';
+  const col=(i==4)?M[method][2]:'#4CC38A';
   h+=`<g class="node ${cl}" data-i="${i}" style="--c:${col}"><rect x="${x-62}" y="${y-30}" width="124" height="104"/><text class="num" x="${x}" y="${y-15}">STEP ${i+1}</text><text class="ic" x="${x}" y="${y+10}">${s.ic}</text><text class="tt" x="${x}" y="${y+33}">${s.t}</text><text class="ss" x="${x}" y="${y+49}">${s.sub}</text></g>`;}
  h+='</svg><div id="panel"></div>';
  document.getElementById('wf').innerHTML=h; panel(); bind();}
-function panel(){const s=S[cur]; const col=(cur==4)?M[method][2]:'#4FA3F7'; let f=s.f, d=s.d, k=s.k;
+function panel(){const s=S[cur]; const col=(cur==4)?M[method][2]:'#4CC38A'; let f=s.f, d=s.d, k=s.k;
  if(s.id=='weights'){f='log w<sub>j</sub> = γ·(−log|b<sup>ridge</sup><sub>j</sub>|) + '+(method=='LASSO'?'—':M[method][0].replace(/^[^=]*=/,''));
    if(method=='LASSO') f=M[method][0]; d='This is where the four methods differ. '+M[method][1]; k='Selected method: <b style="color:'+col+'">'+method+'</b>. Click another chip above to compare.';}
  document.getElementById('panel').innerHTML=`<h3 style="color:${col}">${s.ic} Step ${cur+1}: ${s.t}</h3><p>${d}</p><div id="formula" style="--c:${col}">${f}</div><p class="key">${k}</p>`;}

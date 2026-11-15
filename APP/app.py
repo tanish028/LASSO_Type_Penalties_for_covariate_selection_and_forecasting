@@ -27,9 +27,9 @@ def home():
         n_rep = int(s.n_rep.max())
         fm = dl.load_csv("fred_md/metrics_all_variants.csv")
         best_fred = fm[fm.method != "AR(BIC)"].R2_OS.max()
-        ui.tiles([("Small samples (T = 50)", f"−{g50.min():.0f}% to −{g50.max():.0f}%", "forecast error of WLadaLASSO vs adaLASSO", "#4FA3F7"),
-                  ("Large samples (T = 500)", f"−{g500.min():.1f}% to −{g500.max():.1f}%", "the advantage almost vanishes", "#9AA7BD"),
-                  ("Simulation scale", f"12 × {n_rep:,}", "scenarios × replications per scenario", "#3FD0A0"),
+        ui.tiles([("Small samples (T = 50)", f"−{g50.min():.0f}% to −{g50.max():.0f}%", "forecast error of WLadaLASSO vs adaLASSO", "#4CC38A"),
+                  ("Large samples (T = 500)", f"−{g500.min():.1f}% to −{g500.max():.1f}%", "the advantage almost vanishes", "#9AA79F"),
+                  ("Simulation scale", f"12 × {n_rep:,}", "scenarios × replications per scenario", "#B8DC6B"),
                   ("FRED-MD vs AR(BIC)", f"{best_fred:+.3f}", "best R²OS of any method: none beats the benchmark", "#E06C75")])
     except DataProblem as e:
         st.error(str(e))
@@ -40,12 +40,12 @@ def home():
 
     st.markdown("## Explore")
     c = st.columns(3)
-    cards = [("pages/1_Lab.py", "🧪 Live lab", "Simulate data, change ρ, T, L, noise, γ, α, κ and watch the four methods select variables and forecast. Run it 40 times in one click.", "#4FA3F7"),
+    cards = [("pages/1_Lab.py", "🧪 Live lab", "Simulate data, change ρ, T, L, noise, γ, α, κ and watch the four methods select variables and forecast. Run it 40 times in one click.", "#4CC38A"),
              ("pages/2_Penalty_Explorer.py", "🎚️ Penalty explorer", "Animate the lag penalty, see the weight map, and test which lags survive shrinkage.", "#E9A93B"),
-             ("pages/3_Monte_Carlo.py", "🗺️ Monte Carlo", "A map of the 12 scenarios: where one method beats another, with drill-down into 1,000 replications.", "#3FD0A0"),
-             ("pages/4_Equity_Premium.py", "📊 Equity premium", "R² out of sample across three data versions, significance stars, and the comparison with the paper.", "#9CCBFA"),
+             ("pages/3_Monte_Carlo.py", "🗺️ Monte Carlo", "A map of the 12 scenarios: where one method beats another, with drill-down into 1,000 replications.", "#B8DC6B"),
+             ("pages/4_Equity_Premium.py", "📊 Equity premium", "R² out of sample across three data versions, significance stars, and the comparison with the paper.", "#A9E3C4"),
              ("pages/5_FRED_MD.py", "🏇 FRED-MD", "Race the methods against AR(BIC), month by month, in any window.", "#E06C75"),
-             ("pages/6_Methods.py", "📘 Methods", "Equations and plain-language definitions of all four methods and the evaluation measures.", "#9AA7BD")]
+             ("pages/6_Methods.py", "📘 Methods", "Equations and plain-language definitions of all four methods and the evaluation measures.", "#9AA79F")]
     for i, (page, title, text, col) in enumerate(cards):
         with c[i % 3]:
             ui.card(title, text, col)

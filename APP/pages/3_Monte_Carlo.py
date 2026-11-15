@@ -164,7 +164,7 @@ with tab_map:
     Zm = g.pivot(index="L", columns="col", values="good").reindex(columns=cols)
     Tx = g.pivot(index="L", columns="col", values="pct").reindex(columns=cols)
     lim = max(5, float(np.nanmax(np.abs(Zm.values))))
-    fig = go.Figure(go.Heatmap(z=Zm.values, x=cols, y=[f"L={int(l)}" for l in Zm.index], zmin=-lim, zmax=lim, colorscale=[[0, "#E06C75"], [0.5, "#16213B"], [1, "#4FA3F7"]],
+    fig = go.Figure(go.Heatmap(z=Zm.values, x=cols, y=[f"L={int(l)}" for l in Zm.index], zmin=-lim, zmax=lim, colorscale=[[0, "#E06C75"], [0.5, "#142219"], [1, "#4CC38A"]],
                                text=[[f"{v:+.1f}%" for v in row] for row in Tx.values], texttemplate="%{text}", textfont=dict(size=15, color="#FFFFFF"), xgap=3, ygap=3,
                                colorbar=dict(title="better →"), hovertemplate="%{y}, %{x}<br>%{text}<extra></extra>"))
     fig.update_layout(height=330, yaxis=dict(autorange="reversed"), title=f"{A} vs {B}: change in mean {lab_m.split(':')[0].split(' (')[0]} (blue = {A} better)")
@@ -185,11 +185,11 @@ with tab_map:
         share = float((diff < 0).mean()); tie = float((diff == 0).mean())
         ui.tiles([(f"Mean MSFE {A}", f"{wide[A].mean():.3f}", f"median {wide[A].median():.3f}", COLORS[A]),
                    (f"Mean MSFE {B}", f"{wide[B].mean():.3f}", f"median {wide[B].median():.3f}", COLORS[B]),
-                   (f"{A} lower in", f"{share:.0%}", f"of {len(wide)} replications" + (f" ({tie:.1%} tied)" if tie else ""), "#7BE5C0"),
+                   (f"{A} lower in", f"{share:.0%}", f"of {len(wide)} replications" + (f" ({tie:.1%} tied)" if tie else ""), "#D2EC9C"),
                    ("Mean paired difference", f"{diff.mean():+.3f}", f"s.e. {diff.std() / np.sqrt(len(diff)):.3f}", None)])
         left, right = st.columns(2)
         with left:
-            fh = go.Figure(go.Histogram(x=diff.clip(diff.quantile(0.01), diff.quantile(0.99)), nbinsx=50, marker_color="#4FA3F7"))
+            fh = go.Figure(go.Histogram(x=diff.clip(diff.quantile(0.01), diff.quantile(0.99)), nbinsx=50, marker_color="#4CC38A"))
             fh.add_vline(x=0, line_color="#fff", line_dash="dash")
             fh.update_layout(height=340, title=f"MSFE({A}) − MSFE({B}), same data, each replication", xaxis_title="negative = first method better (1%-99% range shown)", yaxis_title="replications", bargap=0.04)
             st.plotly_chart(fh, width="stretch")

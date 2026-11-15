@@ -144,7 +144,7 @@ with tab_exp:
         st.info("Pick at least one model.")
     else:
         fig = go.Figure()
-        vcols = {"original_2005": "#9CCBFA", "current_crsp": "#4FA3F7", "current_index": "#2B6CB0"}
+        vcols = {"original_2005": "#A9E3C4", "current_crsp": "#4CC38A", "current_index": "#2F8F63"}
         stars = 0; total = 0
         for v, lab in dl.EQ_VERSIONS.items():
             d = allD[v][(allD[v].start == start_sel) & allD[v].model.isin(picks)].set_index("model").reindex(picks)
@@ -156,7 +156,7 @@ with tab_exp:
         fig.update_layout(barmode="group", height=440, yaxis_title="R²_OS against the historical mean", legend=dict(orientation="h", y=1.12))
         st.plotly_chart(fig, width="stretch")
         best_row = pd.concat([allD[v].assign(ver=v) for v in dl.EQ_VERSIONS]).query("start == @start_sel and model in @picks").sort_values("R2_OS", ascending=False).iloc[0]
-        ui.tiles([("Highest R²_OS shown", f"{best_row.R2_OS:+.3f}", f"{dl.EQ_MODELS.get(best_row.model, best_row.model)}, {dl.EQ_VERSIONS[best_row.ver]}", "#7BE5C0"),
+        ui.tiles([("Highest R²_OS shown", f"{best_row.R2_OS:+.3f}", f"{dl.EQ_MODELS.get(best_row.model, best_row.model)}, {dl.EQ_VERSIONS[best_row.ver]}", "#D2EC9C"),
                   (f"Significant at {alpha_sig:.0%}", f"{stars} of {total}", "unadjusted for multiple tests", "#E9A93B"),
                   ("Evaluation start", str(start_sel), f"{2005 - int(start_sel) + 1} annual forecasts", None)])
     st.markdown('<p class="small">With 21 to 51 annual forecasts the tests have little power. Bars are saved results; nothing is recomputed here.</p>', unsafe_allow_html=True)
