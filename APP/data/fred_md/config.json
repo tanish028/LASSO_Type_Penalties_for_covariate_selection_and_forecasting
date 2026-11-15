@@ -1,0 +1,41 @@
+{
+ "target": "CPIAUCSL",
+ "L": 12,
+ "horizon": 1,
+ "refit_every": 1,
+ "origins": [
+  "2020-10-01",
+  "2025-09-01"
+ ],
+ "n_origins": 60,
+ "sample_end": "2025-09-01",
+ "grids": {
+  "gammas": [
+   0.5,
+   1.0,
+   1.5,
+   2.0
+  ],
+  "alphas": [
+   0.0,
+   0.05,
+   0.1,
+   0.2,
+   0.35,
+   0.5
+  ],
+  "kappas": [
+   0.0,
+   0.5,
+   1.0,
+   2.0
+  ]
+ },
+ "path": "eps1e-4",
+ "benchmark": "AR(p), p=0..12 by BIC, expanding window, same for all methods",
+ "gamma": "1 (fixed) for adaLASSO / WLadaLASSO / Ext1",
+ "checkpoint": "../results/empirical/fred_ckpt_919b6d3e",
+ "n_obs": 787,
+ "n_series": 121,
+ "seeds": "none (deterministic: BIC ridge via SVD)"
+}

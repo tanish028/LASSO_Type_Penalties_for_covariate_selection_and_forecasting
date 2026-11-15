@@ -1,0 +1,271 @@
+{
+ "monte_carlo/replication_metrics.csv.gz": {
+  "source": "monte_carlo/standard/standard_5bbd41f57a/replication_results.csv.gz",
+  "how": "selected columns, rounded to 6 decimals (replication level, 12 scenarios x 4 methods x 1,000 replications)",
+  "rows": 48000
+ },
+ "monte_carlo/summary_all_metrics.csv": {
+  "source": "res/WLadaLASSO_results/monte_carlo/summaries/standard_5bbd41f57a/summary_all_metrics.csv",
+  "how": "copied unchanged"
+ },
+ "monte_carlo/boundary_diagnostics_by_scenario.csv": {
+  "source": "res/WLadaLASSO_results/monte_carlo/summaries/standard_5bbd41f57a/boundary_diagnostics_by_scenario.csv",
+  "how": "copied unchanged"
+ },
+ "monte_carlo/completion_by_scenario.csv": {
+  "source": "res/WLadaLASSO_results/monte_carlo/standard/standard_5bbd41f57a/completion_by_scenario.csv",
+  "how": "copied unchanged"
+ },
+ "monte_carlo/run_metadata.json": {
+  "source": "res/WLadaLASSO_results/monte_carlo/standard/standard_5bbd41f57a/run_metadata.json",
+  "how": "copied unchanged"
+ },
+ "../assets/mc_msfe_boxplots_1000.png": {
+  "source": "monte_carlo/figures/standard_5bbd41f57a/mc_msfe_boxplots_standard_standard_5bbd41f57a.png",
+  "how": "copied unchanged"
+ },
+ "monte_carlo/paired_msfe_comparisons.csv": {
+  "source": "monte_carlo/standard/standard_5bbd41f57a/replication_results.csv.gz",
+  "how": "computed here from replication-level fc_mse: ratio of means, share of replications where the first method has the strictly lower MSFE (and the share of exact ties), mean paired difference and its iid standard error",
+  "rows": 60
+ },
+ "gamma_bic_monte_carlo/completion_by_scenario.csv": {
+  "source": "02_Gamma_BIC_Monte_Carlo/checkpoints (chunk files, manifests)",
+  "how": "counted from chunk checkpoints",
+  "rows": 12
+ },
+ "gamma_bic_monte_carlo/replication_metrics.csv.gz": {
+  "source": "02_Gamma_BIC_Monte_Carlo/checkpoints chunk_*.pkl",
+  "how": "concatenated chunk checkpoints of the 8 scenarios with 300 complete replications (the 240-replication scenario is excluded); selected columns",
+  "rows": 16800
+ },
+ "_checks": {
+  "gamma_bic_fixed_columns_vs_main_run_max_abs_diff_fc_mse": 7.105427357601002e-15,
+  "n_compared": 9600,
+  "equity_fixed_rows_vs_gammabic_run_max_abs_diff_R2OS": 0.0,
+  "stray_duplicate_folder_current_index/original_2005_csv_identical_to_original_2005": true
+ },
+ "gamma_bic_monte_carlo/summary_by_scenario.csv": {
+  "source": "02_Gamma_BIC_Monte_Carlo/checkpoints chunk_*.pkl",
+  "how": "computed here: mean and sd over the 300 replications for each scenario and method; share_gamma_3 = share of fits whose BIC-chosen gamma was 3 (grid maximum)",
+  "rows": 56
+ },
+ "gamma_bic_monte_carlo/gamma_choice_counts.csv": {
+  "source": "02_Gamma_BIC_Monte_Carlo/checkpoints chunk_*.pkl",
+  "how": "computed here: counts of the first-origin gamma chosen by BIC (gamma0)",
+  "rows": 138
+ },
+ "gamma_bic_monte_carlo/paired_gamma_bic_vs_gamma1.csv": {
+  "source": "02_Gamma_BIC_Monte_Carlo/checkpoints chunk_*.pkl",
+  "how": "computed here: gamma chosen by BIC vs gamma = 1 on identical replications (paired t-test across replications, descriptive, no multiplicity adjustment)",
+  "rows": 24
+ },
+ "gamma_bic_monte_carlo/run_metadata.json": {
+  "source": "02_Gamma_BIC_Monte_Carlo/monte_carlo/gamma_robustness/.../run_metadata.json",
+  "how": "copied unchanged (its status says 'running (or interrupted)': the run was stopped before finishing)"
+ },
+ "equity_premium/original_2005_r2os_long.csv": {
+  "source": "equity_premium/original_2005/standard_original_2005_index_A_primary_c9b6b78424/r2os_and_mdm_pvalues_long.csv",
+  "how": "copied, version column added",
+  "rows": 63
+ },
+ "equity_premium/original_2005_comparison_with_paper.csv": {
+  "source": "equity_premium/original_2005/standard_original_2005_index_A_primary_c9b6b78424/comparison_with_paper_table_X.csv",
+  "how": "copied, version column added",
+  "rows": 60
+ },
+ "equity_premium/original_2005_selection_summary.csv": {
+  "source": "equity_premium/original_2005/standard_original_2005_index_A_primary_c9b6b78424/selection_summary.csv",
+  "how": "copied, version column added",
+  "rows": 4
+ },
+ "equity_premium/original_2005_selection_per_origin.csv": {
+  "source": "equity_premium/original_2005/standard_original_2005_index_A_primary_c9b6b78424/selection_per_origin_*.csv",
+  "how": "concatenated, method column added",
+  "rows": 204
+ },
+ "equity_premium/original_2005_run_metadata.json": {
+  "source": "equity_premium/original_2005/standard_original_2005_index_A_primary_c9b6b78424/run_metadata.json",
+  "how": "copied unchanged"
+ },
+ "gamma_bic_equity/original_2005_r2os_long.csv": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/original_2005/full_original_2005_index_A_primary_90abe266bc/r2os_and_mdm_pvalues_long.csv",
+  "how": "copied, version column added",
+  "rows": 75
+ },
+ "gamma_bic_equity/original_2005_comparison_with_paper.csv": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/original_2005/full_original_2005_index_A_primary_90abe266bc/comparison_with_paper_table_X.csv",
+  "how": "copied, version column added",
+  "rows": 60
+ },
+ "gamma_bic_equity/original_2005_selection_summary.csv": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/original_2005/full_original_2005_index_A_primary_90abe266bc/selection_summary.csv",
+  "how": "copied, version column added",
+  "rows": 7
+ },
+ "gamma_bic_equity/original_2005_selection_per_origin.csv": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/original_2005/full_original_2005_index_A_primary_90abe266bc/selection_per_origin_*.csv",
+  "how": "concatenated, method column added",
+  "rows": 357
+ },
+ "gamma_bic_equity/original_2005_run_metadata.json": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/original_2005/full_original_2005_index_A_primary_90abe266bc/run_metadata.json",
+  "how": "copied unchanged"
+ },
+ "equity_premium/current_crsp_r2os_long.csv": {
+  "source": "equity_premium/current_crsp/standard_current_crsp_A_primary_c8c86ed433/r2os_and_mdm_pvalues_long.csv",
+  "how": "copied, version column added",
+  "rows": 63
+ },
+ "equity_premium/current_crsp_comparison_with_paper.csv": {
+  "source": "equity_premium/current_crsp/standard_current_crsp_A_primary_c8c86ed433/comparison_with_paper_table_X.csv",
+  "how": "copied, version column added",
+  "rows": 60
+ },
+ "equity_premium/current_crsp_selection_summary.csv": {
+  "source": "equity_premium/current_crsp/standard_current_crsp_A_primary_c8c86ed433/selection_summary.csv",
+  "how": "copied, version column added",
+  "rows": 4
+ },
+ "equity_premium/current_crsp_selection_per_origin.csv": {
+  "source": "equity_premium/current_crsp/standard_current_crsp_A_primary_c8c86ed433/selection_per_origin_*.csv",
+  "how": "concatenated, method column added",
+  "rows": 204
+ },
+ "equity_premium/current_crsp_run_metadata.json": {
+  "source": "equity_premium/current_crsp/standard_current_crsp_A_primary_c8c86ed433/run_metadata.json",
+  "how": "copied unchanged"
+ },
+ "gamma_bic_equity/current_crsp_r2os_long.csv": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/current_crsp/full_current_crsp_A_primary_26c4893acd/r2os_and_mdm_pvalues_long.csv",
+  "how": "copied, version column added",
+  "rows": 75
+ },
+ "gamma_bic_equity/current_crsp_comparison_with_paper.csv": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/current_crsp/full_current_crsp_A_primary_26c4893acd/comparison_with_paper_table_X.csv",
+  "how": "copied, version column added",
+  "rows": 60
+ },
+ "gamma_bic_equity/current_crsp_selection_summary.csv": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/current_crsp/full_current_crsp_A_primary_26c4893acd/selection_summary.csv",
+  "how": "copied, version column added",
+  "rows": 7
+ },
+ "gamma_bic_equity/current_crsp_selection_per_origin.csv": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/current_crsp/full_current_crsp_A_primary_26c4893acd/selection_per_origin_*.csv",
+  "how": "concatenated, method column added",
+  "rows": 357
+ },
+ "gamma_bic_equity/current_crsp_run_metadata.json": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/current_crsp/full_current_crsp_A_primary_26c4893acd/run_metadata.json",
+  "how": "copied unchanged"
+ },
+ "equity_premium/current_index_r2os_long.csv": {
+  "source": "equity_premium/current_index/standard_current_index_A_primary_162308516d/r2os_and_mdm_pvalues_long.csv",
+  "how": "copied, version column added",
+  "rows": 63
+ },
+ "equity_premium/current_index_comparison_with_paper.csv": {
+  "source": "equity_premium/current_index/standard_current_index_A_primary_162308516d/comparison_with_paper_table_X.csv",
+  "how": "copied, version column added",
+  "rows": 60
+ },
+ "equity_premium/current_index_selection_summary.csv": {
+  "source": "equity_premium/current_index/standard_current_index_A_primary_162308516d/selection_summary.csv",
+  "how": "copied, version column added",
+  "rows": 4
+ },
+ "equity_premium/current_index_selection_per_origin.csv": {
+  "source": "equity_premium/current_index/standard_current_index_A_primary_162308516d/selection_per_origin_*.csv",
+  "how": "concatenated, method column added",
+  "rows": 204
+ },
+ "equity_premium/current_index_run_metadata.json": {
+  "source": "equity_premium/current_index/standard_current_index_A_primary_162308516d/run_metadata.json",
+  "how": "copied unchanged"
+ },
+ "gamma_bic_equity/current_index_r2os_long.csv": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/current_index/full_current_index_A_primary_aa75c1a78b/r2os_and_mdm_pvalues_long.csv",
+  "how": "copied, version column added",
+  "rows": 75
+ },
+ "gamma_bic_equity/current_index_comparison_with_paper.csv": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/current_index/full_current_index_A_primary_aa75c1a78b/comparison_with_paper_table_X.csv",
+  "how": "copied, version column added",
+  "rows": 60
+ },
+ "gamma_bic_equity/current_index_selection_summary.csv": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/current_index/full_current_index_A_primary_aa75c1a78b/selection_summary.csv",
+  "how": "copied, version column added",
+  "rows": 7
+ },
+ "gamma_bic_equity/current_index_selection_per_origin.csv": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/current_index/full_current_index_A_primary_aa75c1a78b/selection_per_origin_*.csv",
+  "how": "concatenated, method column added",
+  "rows": 357
+ },
+ "gamma_bic_equity/current_index_run_metadata.json": {
+  "source": "03_Gamma_BIC_Empirical/equity_premium/current_index/full_current_index_A_primary_aa75c1a78b/run_metadata.json",
+  "how": "copied unchanged"
+ },
+ "fred_md/forecasts_all_variants.csv": {
+  "source": "fred/fred_md_package_v2/computed_from_saved_forecasts/forecasts_all_variants.csv",
+  "how": "copied unchanged (computed from saved forecasts by the earlier package; nothing re-fitted)"
+ },
+ "fred_md/metrics_all_variants.csv": {
+  "source": "fred/fred_md_package_v2/computed_from_saved_forecasts/metrics_all_variants.csv",
+  "how": "copied unchanged (computed from saved forecasts by the earlier package; nothing re-fitted)"
+ },
+ "fred_md/selected_gamma_alpha_kappa_counts.csv": {
+  "source": "fred/fred_md_package_v2/computed_from_saved_forecasts/selected_gamma_alpha_kappa_counts.csv",
+  "how": "copied unchanged (computed from saved forecasts by the earlier package; nothing re-fitted)"
+ },
+ "fred_md/selection_per_origin_all_variants.csv": {
+  "source": "fred/fred_md_package_v2/computed_from_saved_forecasts/selection_per_origin_all_variants.csv",
+  "how": "copied unchanged (computed from saved forecasts by the earlier package; nothing re-fitted)"
+ },
+ "fred_md/subperiod_metrics_all_variants_EXPLORATORY.csv": {
+  "source": "fred/fred_md_package_v2/computed_from_saved_forecasts/subperiod_metrics_all_variants_EXPLORATORY.csv",
+  "how": "copied unchanged (computed from saved forecasts by the earlier package; nothing re-fitted)"
+ },
+ "fred_md/subperiod_paired_diffs_with_ratio.csv": {
+  "source": "fred/fred_md_package_v2/computed_from_saved_forecasts/subperiod_paired_diffs_with_ratio.csv",
+  "how": "copied unchanged (computed from saved forecasts by the earlier package; nothing re-fitted)"
+ },
+ "fred_md/tests_each_method_vs_AR_BIC.csv": {
+  "source": "fred/fred_md_package_v2/computed_from_saved_forecasts/tests_each_method_vs_AR_BIC.csv",
+  "how": "copied unchanged (computed from saved forecasts by the earlier package; nothing re-fitted)"
+ },
+ "fred_md/tests_pairwise_all_variants.csv": {
+  "source": "fred/fred_md_package_v2/computed_from_saved_forecasts/tests_pairwise_all_variants.csv",
+  "how": "copied unchanged (computed from saved forecasts by the earlier package; nothing re-fitted)"
+ },
+ "fred_md/verification_record.json": {
+  "source": "fred/fred_md_package_v2/computed_from_saved_forecasts/verification_record.json",
+  "how": "copied unchanged"
+ },
+ "fred_md/kkt_check_summary_by_variant.csv": {
+  "source": "fred/fred_md_package_v2/original_files/kkt_check_summary_by_variant.csv",
+  "how": "copied unchanged"
+ },
+ "fred_md/highiter_6origins_comparison.csv": {
+  "source": "fred/fred_md_package_v2/original_files/highiter_6origins_comparison.csv",
+  "how": "copied unchanged"
+ },
+ "fred_md/fred_convergence_origin0.csv": {
+  "source": "fred/fred_md_package_v2/original_files/fred_convergence_origin0.csv",
+  "how": "copied unchanged"
+ },
+ "fred_md/ar_bic_order_per_origin.csv": {
+  "source": "fred/fred_md_package_v2/original_files/ar_bic_order_per_origin.csv",
+  "how": "copied unchanged"
+ },
+ "fred_md/config.json": {
+  "source": "fred/fred_md_package_v2/original_files/config.json",
+  "how": "copied unchanged"
+ },
+ "fred_md/FRED_MD_RESULTS_CORRECTED.md": {
+  "source": "fred/fred_md_package_v2/FRED_MD_RESULTS_CORRECTED.md",
+  "how": "copied unchanged"
+ }
+}

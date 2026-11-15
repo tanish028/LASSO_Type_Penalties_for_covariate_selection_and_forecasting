@@ -1,0 +1,25 @@
+method,parameter,value,n_origins,share
+adaLASSO,gamma,1.0,60,1.0
+adaLASSO (gamma by BIC),gamma,1.5,2,0.03333333333333333
+adaLASSO (gamma by BIC),gamma,2.0,58,0.9666666666666667
+WLadaLASSO,gamma,1.0,60,1.0
+WLadaLASSO,alpha_or_kappa,0.05,29,0.48333333333333334
+WLadaLASSO,alpha_or_kappa,0.1,18,0.3
+WLadaLASSO,alpha_or_kappa,0.2,8,0.13333333333333333
+WLadaLASSO,alpha_or_kappa,0.35,1,0.016666666666666666
+WLadaLASSO,alpha_or_kappa,0.5,4,0.06666666666666667
+WLadaLASSO (gamma by BIC),gamma,1.5,37,0.6166666666666667
+WLadaLASSO (gamma by BIC),gamma,2.0,23,0.38333333333333336
+WLadaLASSO (gamma by BIC),alpha_or_kappa,0.05,32,0.5333333333333333
+WLadaLASSO (gamma by BIC),alpha_or_kappa,0.1,27,0.45
+WLadaLASSO (gamma by BIC),alpha_or_kappa,0.5,1,0.016666666666666666
+Ext1,gamma,1.0,60,1.0
+Ext1,alpha_or_kappa,0.5,7,0.11666666666666667
+Ext1,alpha_or_kappa,1.0,51,0.85
+Ext1,alpha_or_kappa,2.0,2,0.03333333333333333
+Ext1 (gamma by BIC),gamma,1.0,15,0.25
+Ext1 (gamma by BIC),gamma,1.5,29,0.48333333333333334
+Ext1 (gamma by BIC),gamma,2.0,16,0.26666666666666666
+Ext1 (gamma by BIC),alpha_or_kappa,0.5,13,0.21666666666666667
+Ext1 (gamma by BIC),alpha_or_kappa,1.0,34,0.5666666666666667
+Ext1 (gamma by BIC),alpha_or_kappa,2.0,13,0.21666666666666667

@@ -1,0 +1,5 @@
+version,method,mean lag order,mean number of selected variables,share of fits with lambda at the smallest grid value,share with alpha at upper bound,share with kappa at upper bound
+original_2005,LASSO,1.7450980392156863,1.03921568627451,0.0,0.0,0.0
+original_2005,adaLASSO,2.372549019607843,2.176470588235294,0.0,0.0,0.0
+original_2005,WLadaLASSO,2.5294117647058822,2.411764705882353,0.0,0.0,0.0
+original_2005,Ext1,2.5098039215686274,2.372549019607843,0.0,0.0,0.0196078431372549

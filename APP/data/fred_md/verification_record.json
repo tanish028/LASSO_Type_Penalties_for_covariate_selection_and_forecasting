@@ -1,0 +1,10 @@
+{
+ "target recomputed from raw current.csv: max |actual - recomputed|": 1.7763568394002505e-15,
+ "pkl forecasts vs forecasts.csv (3 gamma=1 methods): max abs diff": 2.6645352591003757e-15,
+ "metrics (MSFE, MAE, R2_OS) vs saved metrics.csv, max abs diff": 5.551115123125783e-17,
+ "pairwise tests vs saved paired.csv: max abs diff (mean diff, CI low, p)": 9.020562075079397e-17,
+ "sub-period table vs saved fred_subperiod_metrics.csv: max abs diff": 1.0658141036401503e-14,
+ "number of candidate regressors in saved fits": 1464,
+ "number of series incl. target (n_obs x series from log): 122": 122,
+ "mean n_selected adaLASSO (exact)": 15.95
+}

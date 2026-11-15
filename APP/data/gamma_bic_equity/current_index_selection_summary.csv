@@ -1,0 +1,8 @@
+version,method,mean lag order,mean number of selected variables,share of fits with lambda at the smallest grid value,share with alpha at upper bound,share with kappa at upper bound
+current_index,LASSO,1.7450980392156863,1.3529411764705883,0.0,0.0,0.0
+current_index,adaLASSO,2.392156862745098,1.8235294117647056,0.0,0.0,0.0
+current_index,adaLASSO (gamma by BIC),3.235294117647059,2.549019607843137,0.0,0.0,0.0
+current_index,WLadaLASSO,2.607843137254902,2.313725490196078,0.0,0.0,0.0
+current_index,WLadaLASSO (gamma by BIC),3.803921568627451,3.176470588235294,0.0,0.0,0.0
+current_index,Ext1,2.6666666666666665,1.9019607843137252,0.0,0.0,0.0196078431372549
+current_index,Ext1 (gamma by BIC),3.588235294117647,2.862745098039216,0.0,0.0,0.1176470588235294
